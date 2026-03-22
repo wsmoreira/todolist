@@ -4,9 +4,9 @@ RUN apt-get update && apt-get install openjdk-21-jdk maven -y
 
 COPY . .
 
-RUN mvnw.cmd clean install -DskipTests
+RUN chmod +x mvnw && ./mvnw clean install -DskipTests
 
-FROM openjdk:21-jdk-slim
+FROM eclipse-temurin:21-jdk-alpine
 
 COPY --from=build /target/todolist-0.0.1-SNAPSHOT.jar app.jar
 
